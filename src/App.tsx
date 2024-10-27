@@ -1,6 +1,5 @@
 import {
   createBrowserRouter,
-  Link,
   Outlet,
   RouterProvider,
 } from "react-router-dom";
@@ -17,8 +16,7 @@ function App() {
     return (
       <>
         <Navbar />
-        <main className="container mx-auto p-8">
-          {/*Dentro del outlet se renderiza el componente que se muestra en la ruta actual*/}
+        <main className="container mx-auto px-8 py-4">
           <Outlet />
         </main>
       </>
@@ -41,15 +39,17 @@ function App() {
         {
           path: "/main",
           element: <Home />
+        },
+        {
+          path: "/main/account",
+          element: <Profile />
+
         }
       ]
     },
     {
       path: "*",
-      element: <Profile />
-          
-        
-      
+      element: <> <span>404</span></>
     }
   ]);
 

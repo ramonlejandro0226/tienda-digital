@@ -4,7 +4,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/main")
+    navigate("/main") 
   }
   return (
     <div>

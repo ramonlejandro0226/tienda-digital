@@ -3,9 +3,9 @@ import SearchBar from '../searchBar/SearchBar'
 
 const Navbar = () => {
     return (
-        <nav className="bg-white">
+        <nav className="bg-white sticky top-0 z-20">
             <div className="flex justify-between items-center container mx-auto px-5 py-4">
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-center gap-1">
                     <NavLink to="/main" className={({ isActive, isPending }) =>
                         `${isPending ? "text-rose-500" : isActive ? "text-blue-500" : ""}`
                     }>
@@ -30,7 +30,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <NavLink to="#">
-                            Suplidores
+                            Pagos
                         </NavLink>
                     </li>
                     <li className="relative overflow-hidden">
@@ -43,7 +43,7 @@ const Navbar = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/account">
+                        <NavLink to="/main/account">
                             <img className="object-cover size-8 rounded-full" src="https://images.pexels.com/photos/27872750/pexels-photo-27872750/free-photo-of-koln-pexels-meetup-model-phibiduboi-on-instagram.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
                         </NavLink>
                     </li>
