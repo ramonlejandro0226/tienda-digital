@@ -1,7 +1,13 @@
 import { NavLink } from 'react-router-dom'
 import SearchBar from '../searchBar/SearchBar'
 
-const Navbar = () => {
+import React from 'react';
+
+interface NavbarProps {
+    onAddproduct: (product: any) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onAddproduct  }) => {
     return (
         <nav className="bg-white sticky top-0 z-20">
             <div className="flex justify-between items-center container mx-auto px-5 py-4">
@@ -14,7 +20,7 @@ const Navbar = () => {
                         </svg>
                     </NavLink>
                     <span>Tienda</span>
-                    <SearchBar />
+                    <SearchBar onAddproduct={onAddproduct } />
                 </div>
 
                 <ul className=" flex gap-5 items-center">

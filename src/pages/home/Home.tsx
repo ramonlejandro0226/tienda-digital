@@ -1,4 +1,5 @@
 import { Carousel } from "flowbite-react";
+import { getphotos } from "../../utils/getphotos";
 const Home = () => {
     // const { isLoading, data } = useQuery("prueba", async () => {
 
@@ -7,6 +8,8 @@ const Home = () => {
     //     }).catch(err => console.error(err.message))
 
     // })
+
+ 
     const imgs = [
         {
 
