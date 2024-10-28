@@ -89,4 +89,8 @@ export const Login = () => {
       </div>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev

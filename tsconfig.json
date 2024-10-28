@@ -1,4 +1,11 @@
 {
+<<<<<<< HEAD
+=======
+  "compilerOptions": {
+    "noImplicitAny": false,
+    // other options...
+  },
+>>>>>>> dev
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
