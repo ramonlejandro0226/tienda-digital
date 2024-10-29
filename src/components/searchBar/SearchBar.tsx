@@ -57,7 +57,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ offset }) => {
-  const { setPhotoName } = useShopContext();
+  const { setPhotoName, toggle } = useShopContext();
   const [name, setName] = useState<string>("");
   const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ offset }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!name) return alert("Debe llenar todos los campos");
+    toggle();
     // if (inputValue.trim().length <= 1) return;
     // setCategories(categories => [inputValue,...categories])
     // getphotos(inputValue).then((result) => {

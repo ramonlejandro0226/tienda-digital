@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {
   createBrowserRouter,
   Outlet,
@@ -39,6 +40,14 @@ function App() {
   }
 =======
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+=======
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
+>>>>>>> dev
 import { Login } from "./pages/login/Login";
 import { Signup } from "./pages/signup/Signup";
 import Navbar from "./components/navbar/Navbar";
@@ -59,6 +68,14 @@ function App() {
   };
 >>>>>>> dev
 
+  const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return <Navigate to="/" replace />;
+    }
+    return children;
+  };
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -70,7 +87,11 @@ function App() {
     },
     {
       path: "/main",
-      element: <Layout />,
+      element: (
+        <PrivateRoute>
+          <Layout />
+        </PrivateRoute>
+      ),
       children: [
         {
           path: "/main",

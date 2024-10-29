@@ -7,6 +7,8 @@ interface Props {
 interface ShopContextType {
   photoName: string;
   setPhotoName: React.Dispatch<React.SetStateAction<string>>;
+  toggle:()=>void
+  shouldFetch:boolean
 }
 const shopContext = createContext({});
 
@@ -20,9 +22,12 @@ const useShopContext = () => {
 
 const ShopContextProvider: React.FC<Props> = ({ children }) => {
   const [photoName, setPhotoName] = useState<string>("");
+  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
+
+  const toggle =()=> setShouldFetch(!shouldFetch)
 
   return (
-    <shopContext.Provider value={{ photoName, setPhotoName }}>
+    <shopContext.Provider value={{ photoName, setPhotoName,toggle,shouldFetch}}>
       {children}
     </shopContext.Provider>
   );

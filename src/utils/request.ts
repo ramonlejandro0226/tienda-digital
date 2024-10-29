@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const req = axios.create({
 
-    // baseURL: "http://localhost:3000",
-    // headers:{
-    //     Authorization
-    // }
+    baseURL: "https://localhost:44306/api/",
+    headers:{
+        Authorization:"Bearer "+localStorage.getItem("token")
+    }
 })
