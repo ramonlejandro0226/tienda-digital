@@ -1,11 +1,37 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/main") 
-  }
+    try {
+      const response = await axios.post(
+        "https://localhost:44306/api/UserExtend/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      // Si la solicitud es exitosa, guarda el token y redirige
+      localStorage.setItem("token", response.data.token);
+      navigate("/main");
+    } catch (err) {
+      // Si hay un error, muestra un mensaje de error
+      setError("Invalid email or password");
+    }
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) return navigate("/main");
+  }, []);
+
   return (
     <div>
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
@@ -14,9 +40,12 @@ export const Login = () => {
             Welcome Back
           </div>
           <div className="mt-10">
-            <form action="#" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-col mb-5">
-                <label htmlFor="email" className="mb-1 text-xs tracking-wide text-gray-600">
+                <label
+                  htmlFor="email"
+                  className="mb-1 text-xs tracking-wide text-gray-600"
+                >
                   E-Mail Address:
                 </label>
                 <div className="relative">
@@ -27,13 +56,18 @@ export const Login = () => {
                     id="email"
                     type="email"
                     name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     placeholder="Enter your email"
                   />
                 </div>
               </div>
               <div className="flex flex-col mb-6">
-                <label htmlFor="password" className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
+                <label
+                  htmlFor="password"
+                  className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
+                >
                   Password:
                 </label>
                 <div className="relative">
@@ -46,11 +80,15 @@ export const Login = () => {
                     id="password"
                     type="password"
                     name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     placeholder="Enter your password"
                   />
                 </div>
               </div>
+
+              {error && <div className="text-red-500 mb-4">{error}</div>}
 
               <div className="flex w-full">
                 <button
@@ -80,7 +118,10 @@ export const Login = () => {
           <div className="inline-flex items-center text-gray-700 font-medium text-xs text-center">
             <span className="ml-2">
               You don't have an account?
-              <Link to={"/signup"} className="text-xs ml-2 text-blue-500 font-semibold">
+              <Link
+                to={"/signup"}
+                className="text-xs ml-2 text-blue-500 font-semibold"
+              >
                 Registrate aqui
               </Link>
             </span>
@@ -89,4 +130,4 @@ export const Login = () => {
       </div>
     </div>
   );
-}
+};
